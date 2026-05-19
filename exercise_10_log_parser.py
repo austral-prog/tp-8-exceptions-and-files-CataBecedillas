@@ -42,4 +42,26 @@ def parse_log(filename):
             "WARN": ["lento"],
         }
     """
-    pass  # Reemplazar con tu implementación
+    diccionario = {}
+    
+    with open (filename, "r") as file:
+        file = file.read()
+        lineas = file.split("\n")
+        for linea in lineas:
+            
+            if linea.strip() == "":
+                continue
+            if ":" not in linea:
+                raise ValueError("invalid log line")
+            
+            nivel, mensaje = linea.split(":", 1)
+            nivel = nivel.strip()
+            mensaje = mensaje.strip()
+            
+            if nivel in diccionario:
+                diccionario[nivel].append(mensaje) #puedo usar append porque como al principio el 
+            else:                                  #diccionario siemrpe va a estar vacio, entonces
+                diccionario[nivel] = [mensaje]     #va a saltar de una al else, y el mensaje va a ser
+                                                   #una lista.
+    return diccionario
+            

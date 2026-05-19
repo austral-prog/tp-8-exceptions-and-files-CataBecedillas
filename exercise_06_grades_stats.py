@@ -1,6 +1,4 @@
 # Ejercicio 6 - Estadísticas de notas por estudiante
-
-
 def grades_stats(filename):
     """
     Lee un archivo donde cada línea tiene el formato:
@@ -34,4 +32,30 @@ def grades_stats(filename):
             "Cami": (10.0, 10.0, 10.0),
         }
     """
-    pass  # Reemplazar con tu implementación
+    diccionario = {}
+    
+    with open (filename, "r") as file:
+        print(type(file))
+        
+        file = file.read()
+        print(type(file))
+        lines = file.split("\n")
+        
+        for line in lines:
+            if line != '': 
+                nombre, notas = line.split(":")
+                notas = notas.split(",")
+                for i in range(len(notas)):
+                    notas[i] = float(notas[i])
+            
+               
+                tupla = (  
+                    sum(notas)/len(notas), 
+                    max(notas),
+                    min(notas)
+                    )
+                    
+                diccionario[nombre] = tupla
+                
+    return diccionario
+        
